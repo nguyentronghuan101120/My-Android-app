@@ -1,5 +1,7 @@
 package com.example.myandroidapp
 
+import HomeScreen
+import LoginPage
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -47,6 +49,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.myandroidapp.ui.theme.MyAndroidAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -59,157 +64,28 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White
                 ) {
-                    LoginPage()
+                    JetpackComposeRoute()
                 }
             }
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginPage(modifier: Modifier = Modifier) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally)
-    {
-        Box(
-            modifier = Modifier.padding(
-                top = 72.dp,
-                start = 162.dp,
-                end = 162.dp,
-                bottom = 30.dp
-            )
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.login_logo),
-                contentDescription = "",
-                modifier = Modifier
-                    .size(50.dp, 50.dp),
+fun JetpackComposeRoute() {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = Route.Login.route) {
+        composable(Route.Login.route) {
+            LoginPage(
+                onPress = {
+                },
             )
         }
-        Text(text = "You must sign in to join", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.padding(bottom = 16.dp))
-        Text(
-            text = "We’re a Team That Guides Each Other",
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Normal,
-            color = Color(0xFFB1B1B1)
-        )
-        Spacer(modifier = Modifier.padding(bottom = 50.dp))
 
-        AppTextField(
-            icon = Icons.Filled.Person,
-            placeHolder = "Uname@mail.com",
-            label = "Email or Username",
-        )
-        Spacer(modifier = Modifier.padding(bottom = 24.dp))
-
-        AppTextField(icon = Icons.Filled.Lock, placeHolder = "Password", label = "Password")
-
-        Spacer(modifier = Modifier.padding(bottom = 30.dp))
-        Box(
-            contentAlignment = Alignment.CenterEnd,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(end = 32.dp)
-        ) {
-            Text(
-                text = "Forgot password?",
-                fontSize = 12.sp,
-                color = Color(0xff818ED5),
-                fontWeight = FontWeight.Bold,
-            )
-        }
-        Spacer(modifier = Modifier.padding(bottom = 30.dp))
-
-        Button(
-            onClick = { /*TODO*/ },
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xff2A08F8)),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 32.dp, end = 32.dp)
-                .height(44.dp),
-            shape = RoundedCornerShape(8.dp),
-        ) {
-            Text(
-                text = "Sign in",
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
-            )
-        }
-        Spacer(modifier = Modifier.padding(bottom = 40.dp))
-
-        Row {
-            Text(
-                text = "Dont have an account? ",
-                color = Color(0xffD1D1D1),
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold,
-            )
-            Text(
-                text = "Sign up",
-                color = Color.Black,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.clickable { }
-            )
+        composable(Route.Home.route) {
+            HomeScreen()
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable()
-fun AppTextField(icon: ImageVector, placeHolder: String, label: String) {
-    Column(modifier = Modifier.padding(start = 32.dp, end = 32.dp)) {
-        Text(
-            text = label,
-            fontWeight = FontWeight.Bold,
-            fontSize = 12.sp,
-            color = Color(0xffB1B1B1),
-        )
-        Spacer(modifier = Modifier.padding(bottom = 8.dp))
-
-        TextField(
-            value = "",
-            onValueChange = { },
-            modifier = Modifier
-                .fillMaxWidth()
-
-                .background(color = MaterialTheme.colorScheme.background)
-                .border(
-                    width = 1.dp,
-                    color = Color(0xFFB1B1B1),
-                    shape = RoundedCornerShape(8.dp) // Adjust the corner radius as needed
-                ),
-
-            leadingIcon = {
-                Icon(
-                    icon,
-                    contentDescription = null,
-                    tint = Color(0xffDFDCDC)
-                )
-            },
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.White, disabledTextColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent
-            ),
-            placeholder = {
-                Text(
-                    placeHolder, fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFFB1B1B1)
-                )
-            },
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PagePreview() {
-    MyAndroidAppTheme {
-        LoginPage()
-    }
-}
