@@ -1,40 +1,34 @@
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.myandroidapp.data.quote.data_source.QuoteDataSource
+import com.example.myandroidapp.presentation.common.AppBar
 import com.example.myandroidapp.presentation.home.QuoteCard
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
-    Scaffold(
-        topBar = {
-            TopAppBar(
+fun HomeScreen(navController: NavController = rememberNavController()) {
 
-                title = {
-                    Text("Top app bar", color = Color.White)
-                },
-                colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color(0xff2A08F8))
-
-            )
-        },
-    ) { innerPadding ->
+    Column {
+        AppBar(
+            navController = navController, isMenu = true,){
+            Text("Hello, World!")
+        }
         LazyColumn(
-            modifier = Modifier.padding(innerPadding),
+            modifier = Modifier.padding(8.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             items(QuoteDataSource().showListQuotes().size) { index ->
-                QuoteCard(quote = QuoteDataSource().showListQuotes()[index].quote)
+                QuoteCard(
+                    quote = QuoteDataSource().showListQuotes()[index].quote,
+                    onClick = { navController.navigate(Route.Detail.createRoute(index)) })
             }
         }
     }

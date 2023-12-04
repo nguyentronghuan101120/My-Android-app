@@ -1,6 +1,7 @@
 package com.example.myandroidapp.presentation.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,8 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun QuoteCard(quote: String) {
-    Card() {
+fun QuoteCard(quote: String, onClick: () -> Unit = {}) {
+    Card(modifier = Modifier.clickable(onClick = onClick)) {
         Column {
             Box(
                 modifier = Modifier
