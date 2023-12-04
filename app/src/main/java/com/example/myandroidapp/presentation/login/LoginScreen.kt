@@ -1,6 +1,4 @@
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,30 +14,24 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.myandroidapp.R
 import com.example.myandroidapp.ui.theme.MyAndroidAppTheme
 
 @Composable
-fun LoginPage(modifier: Modifier = Modifier, onPress: () -> Unit = {}) {
-    val navController = rememberNavController()
+fun LoginPage(navController: NavController = rememberNavController()) {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally)
     {
@@ -102,10 +94,7 @@ fun LoginPage(modifier: Modifier = Modifier, onPress: () -> Unit = {}) {
         Spacer(modifier = Modifier.padding(bottom = 30.dp))
 
         Button(
-            onClick = {
-                navController.navigate(Route.Home.route)
-
-            },
+            onClick = { navController.navigate(Route.Home.route) },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xff2A08F8)),
             modifier = Modifier
                 .fillMaxWidth()
@@ -145,6 +134,6 @@ fun LoginPage(modifier: Modifier = Modifier, onPress: () -> Unit = {}) {
 @Composable
 fun PagePreview() {
     MyAndroidAppTheme {
-        LoginPage()
+//        LoginPage()
     }
 }

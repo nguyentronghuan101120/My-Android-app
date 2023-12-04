@@ -9,11 +9,10 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myandroidapp.data.quote.data_source.QuoteDataSource
-import com.example.myandroidapp.presentation.login.QuoteCard
+import com.example.myandroidapp.presentation.home.QuoteCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
