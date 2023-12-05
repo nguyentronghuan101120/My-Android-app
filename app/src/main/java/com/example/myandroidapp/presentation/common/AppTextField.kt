@@ -12,6 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -22,6 +26,9 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable()
 fun AppTextField(icon: ImageVector, placeHolder: String, label: String) {
+    var text by remember {
+        mutableStateOf("")
+    }
     Column(modifier = Modifier.padding(start = 32.dp, end = 32.dp)) {
         Text(
             text = label,
@@ -32,8 +39,8 @@ fun AppTextField(icon: ImageVector, placeHolder: String, label: String) {
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
 
         TextField(
-            value = "",
-            onValueChange = { },
+            value = text,
+            onValueChange = { text = it},
             modifier = Modifier
                 .fillMaxWidth()
 

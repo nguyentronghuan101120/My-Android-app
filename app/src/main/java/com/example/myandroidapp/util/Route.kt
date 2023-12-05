@@ -36,7 +36,7 @@ fun AppRoute() {
             )
         }
 
-        composable(Route.Home.route) {
+        composable(Route.Home.route) { data->
             HomeScreen(navController = navController)
         }
 
