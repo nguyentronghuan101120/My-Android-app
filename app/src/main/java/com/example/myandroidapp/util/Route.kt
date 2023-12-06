@@ -36,8 +36,9 @@ fun AppRoute() {
             )
         }
 
-        composable(Route.Home.route) { data->
-            HomeScreen(navController = navController)
+        composable(Route.Home.route) { entry->
+            val text = entry.savedStateHandle.get<String>("quoteString")
+            HomeScreen(navController = navController, text = text ?: "Empty")
         }
 
         composable(
