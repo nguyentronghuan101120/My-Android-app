@@ -33,15 +33,14 @@ fun HomeScreen(navController: NavController = rememberNavController(), text: Str
             }
         }
 
-        Text(text = text)
 
         LazyColumn(
             modifier = Modifier.padding(8.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            items(QuoteDataSource().showListQuotes().size) { index ->
+            items(QuoteDataSource().data.size) { index ->
                 QuoteCard(
-                    quote = QuoteDataSource().showListQuotes()[index].quote,
+                    quote = QuoteDataSource().data[index].quote,
                     onClick = { navController.navigate(Route.Detail.createRoute(index)) })
             }
         }
