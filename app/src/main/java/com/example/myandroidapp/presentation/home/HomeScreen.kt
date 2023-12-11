@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.myandroidapp.data.quote.data_source.QuoteDataSource
+import com.example.myandroidapp.data.user.data_source.UserApi
 import com.example.myandroidapp.presentation.common.AppBar
 import com.example.myandroidapp.presentation.home.QuoteCard
 
@@ -34,16 +34,16 @@ fun HomeScreen(navController: NavController = rememberNavController(), text: Str
         }
 
 
-        LazyColumn(
-            modifier = Modifier.padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            items(QuoteDataSource().data.size) { index ->
-                QuoteCard(
-                    quote = QuoteDataSource().data[index].quote,
-                    onClick = { navController.navigate(Route.Detail.createRoute(index)) })
-            }
-        }
+//        LazyColumn(
+//            modifier = Modifier.padding(8.dp),
+//            verticalArrangement = Arrangement.spacedBy(16.dp),
+//        ) {
+//            items(QuoteDataSource().data.size) { index ->
+//                QuoteCard(
+//                    quote = QuoteDataSource().data[index].quote,
+//                    onClick = { navController.navigate(Route.Detail.createRoute(index)) })
+//            }
+//        }
     }
 }
 
