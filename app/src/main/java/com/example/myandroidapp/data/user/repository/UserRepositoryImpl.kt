@@ -7,7 +7,7 @@ import java.lang.Exception
 class UserRepositoryImpl(private val userApi: UserApi) : UserRepository {
     override suspend fun getUsers() {
         try {
-            userApi.userService
+            userApi.getUsers()
         } catch (e: Exception) {
             throw e
         }

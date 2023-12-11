@@ -24,8 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.myandroidapp.data.quote.data_source.QuoteDataSource
-import com.example.myandroidapp.data.quote.models.QuoteModel
 import com.example.myandroidapp.presentation.common.AppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,12 +39,7 @@ fun AddNewQuoteScreen(navController: NavController = rememberNavController()) {
             IconButton(onClick = {
 //                navController.previousBackStackEntry?.savedStateHandle?.set("quoteString", text)
 
-                QuoteDataSource().data.add(
-                    element = QuoteModel(
-                        quote = text,
-                        id = QuoteDataSource().data.size + 1
-                    )
-                )
+
                 navController.popBackStack()
 
             }) {

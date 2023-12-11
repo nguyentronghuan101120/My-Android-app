@@ -1,24 +1,26 @@
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.myandroidapp.data.user.data_source.UserApi
+import com.example.myandroidapp.MyApp
 import com.example.myandroidapp.presentation.common.AppBar
-import com.example.myandroidapp.presentation.home.QuoteCard
+import com.example.myandroidapp.presentation.home.view_model.HomeViewModel
+import com.example.myandroidapp.presentation.home.view_model.viewModelFactory
 
 @Composable
 fun HomeScreen(navController: NavController = rememberNavController(), text: String) {
+
+    val viewModel = viewModel<HomeViewModel>(factory = viewModelFactory { HomeViewModel(
+        MyApp.appModule.userRepository
+    ) })
+
+    viewModel.getUsers()
 
     Column {
         AppBar(
