@@ -5,20 +5,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.myandroidapp.MyApp
 import com.example.myandroidapp.presentation.common.AppBar
 import com.example.myandroidapp.presentation.home.view_model.HomeViewModel
-import com.example.myandroidapp.presentation.home.view_model.viewModelFactory
 
 @Composable
 fun HomeScreen(navController: NavController = rememberNavController(), text: String) {
 
-    val viewModel = viewModel<HomeViewModel>(factory = viewModelFactory { HomeViewModel(
-        MyApp.appModule.userRepository
-    ) })
+    val viewModel = hiltViewModel<HomeViewModel>()
 
     viewModel.getUsers()
 

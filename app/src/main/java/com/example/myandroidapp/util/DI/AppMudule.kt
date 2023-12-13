@@ -1,27 +1,30 @@
 package com.example.myandroidapp.util.DI
 
-import android.content.Context
 import com.example.myandroidapp.data.user.data_source.UserApi
 import com.example.myandroidapp.data.user.repository.UserRepositoryImpl
 import com.example.myandroidapp.domain.user.repository.UserRepository
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
+import javax.inject.Singleton
 
+@Module
+@InstallIn(SingletonComponent::class)
+class AppModule {
 
-interface AppModule {
-    val userApi: UserApi
-    val userRepository: UserRepository
-}
-
-class AppModuleImpl(private val appContext:Context) : AppModule {
-    override val userApi: UserApi by lazy {
-        Retrofit.Builder().baseUrl("http://127.0.0.1:5000/get-users")
-            .addConverterFactory(GsonConverterFactory.create()).build().create()
+    @Provides
+    @Singleton
+    fun provideUserApi(): UserApi {
+        return Retrofit.Builder().baseUrl("http://127.0.0.1:5000/get-users").build()
+            .create(UserApi::class.java)
     }
-    override val userRepository: UserRepository
-       by lazy {
-           UserRepositoryImpl(userApi)
-       }
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(api: UserApi): UserRepository {
+        return UserRepositoryImpl(userApi = api)
+    }
 
 }
