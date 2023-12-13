@@ -18,5 +18,5 @@ import retrofit2.http.GET
 
 interface UserApi {
     @GET("getUsers")
-    suspend fun getUsers()
+    suspend fun getUsers(): BaseResponse<List<UserResponse>>
 }
