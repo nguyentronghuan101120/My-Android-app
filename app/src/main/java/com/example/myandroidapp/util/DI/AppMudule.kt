@@ -8,6 +8,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -17,7 +18,7 @@ class AppModule {
     @Provides
     @Singleton
     fun provideUserApi(): UserApi {
-        return Retrofit.Builder().baseUrl("http://127.0.0.1:5000/get-users/").build()
+        return Retrofit.Builder().baseUrl("http://127.0.0.1:5000/get-users/").addConverterFactory(GsonConverterFactory.create()).build()
             .create(UserApi::class.java)
     }
 
