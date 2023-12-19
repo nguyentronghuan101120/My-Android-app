@@ -10,7 +10,7 @@ class UserRepositoryImpl(private val userApi: UserApi) :
     override suspend fun getUsers(): List<UserResponse> {
         try {
             val result = userApi.getUsers()
-            return result.data
+            return result
         } catch (e: Exception) {
             throw e
         }

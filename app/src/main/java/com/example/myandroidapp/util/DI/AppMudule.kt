@@ -18,7 +18,7 @@ class AppModule {
     @Provides
     @Singleton
     fun provideUserApi(): UserApi {
-        return Retrofit.Builder().baseUrl("http://127.0.0.1:5000/get-users/").addConverterFactory(GsonConverterFactory.create()).build()
+        return Retrofit.Builder().baseUrl("https://jsonplaceholder.typicode.com/").addConverterFactory(GsonConverterFactory.create()).build()
             .create(UserApi::class.java)
     }
 
